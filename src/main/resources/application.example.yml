@@ -1,0 +1,8 @@
+# default category name to use when no category is provided for expense or income transactions
+defaultIncomeCategory: "Other incomes"
+defaultExpenseCategory: "Other expenses"
+
+
+# really a personal thing, I used some tags as "event tags" (eg: travel-summer-2022). Feel free to make it empty without any concerns
+eventTags:
+  - "this is some example tag"
