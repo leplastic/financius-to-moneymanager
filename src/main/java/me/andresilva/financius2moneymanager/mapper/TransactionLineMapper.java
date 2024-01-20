@@ -4,7 +4,7 @@ import me.andresilva.financius2moneymanager.AppConfiguration;
 import me.andresilva.financius2moneymanager.exception.FinanciusToMoneyManagerException;
 import me.andresilva.financius2moneymanager.model.financius.*;
 import me.andresilva.financius2moneymanager.model.moneymanager.TransactionLine;
-import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.mapstruct.Context;
 import org.mapstruct.Mapper;
@@ -113,6 +113,8 @@ public abstract class TransactionLineMapper {
             return null;
         }
 
+        // if some special tags are configured on application.yml, these will be included on the text field "description" on Money Manager
+        // this has no related functionality, it is only as a visual indicator those special tags were asociated with the transaction
         return StringUtils.trimToNull(tagIds.stream()
                 .map(tagId -> financiusJson.getTagById(tagId).orElseThrow(() -> new FinanciusToMoneyManagerException("Unexpected tag id " + tagId)))
                 .map(Tag::getTitle)

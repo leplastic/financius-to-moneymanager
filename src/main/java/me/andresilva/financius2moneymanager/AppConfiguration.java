@@ -1,7 +1,7 @@
 package me.andresilva.financius2moneymanager;
 
 import lombok.Data;
-import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
@@ -20,9 +20,8 @@ public class AppConfiguration {
     private String defaultExpenseCategory;
 
     public boolean isEventTag(String tagTitle) {
-        return CollectionUtils.isNotEmpty(eventTags) &&
-                eventTags.stream()
-                        .anyMatch(eventTag -> eventTag.equals(tagTitle));
+        return CollectionUtils.emptyIfNull(eventTags).stream()
+                .anyMatch(eventTag -> eventTag.equals(tagTitle));
     }
 
 
