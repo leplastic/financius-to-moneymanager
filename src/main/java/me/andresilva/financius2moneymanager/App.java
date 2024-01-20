@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import me.andresilva.financius2moneymanager.mapper.TransactionLineMapper;
 import me.andresilva.financius2moneymanager.model.financius.FinanciusJson;
 import me.andresilva.financius2moneymanager.model.financius.module.FinanciusJsonModule;
@@ -38,11 +37,12 @@ public class App implements CommandLineRunner {
 
         // import
         InputStream inJson = Files.newInputStream(Paths.get("financius.json"));
-        FinanciusJson sample = new ObjectMapper().registerModules(new JavaTimeModule(), new FinanciusJsonModule()).readValue(inJson, FinanciusJson.class);
-        //System.out.println(sample);
+        FinanciusJson financiusJson = new ObjectMapper()
+                .registerModules(new FinanciusJsonModule())
+                .readValue(inJson, FinanciusJson.class);
 
         // transform
-        List<TransactionLine> transactionLines = transactionLineMapper.financiusModelToMoneyManagerTransactionLineList(sample);
+        List<TransactionLine> transactionLines = transactionLineMapper.financiusModelToMoneyManagerTransactionLineList(financiusJson);
 
         // export
         OutputStream output = Files.newOutputStream(Path.of("exported.tsv"));
@@ -62,7 +62,7 @@ public class App implements CommandLineRunner {
 
         new CsvMapper()
                 .configure(JsonGenerator.Feature.IGNORE_UNKNOWN, true)
-                .registerModules(new JavaTimeModule(), new MoneyManagerTSVModule())
+                .registerModules(new MoneyManagerTSVModule())
                 .writerFor(TransactionLine.class)
                 .with(schema)
                 .writeValues(output)

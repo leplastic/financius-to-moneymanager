@@ -30,6 +30,7 @@ public abstract class TransactionLineMapper {
 
     public List<TransactionLine> financiusModelToMoneyManagerTransactionLineList(FinanciusJson financiusJson) {
         return financiusJson.getTransactions().stream()
+                .filter(not(Transaction::isTransactionSoftDeleted))
                 .map(transaction -> financiusTransactionToMoneyManagerTransactionLine(transaction, financiusJson))
                 .toList();
     }
@@ -96,6 +97,11 @@ public abstract class TransactionLineMapper {
         // include in reports
         if (Boolean.FALSE.equals(transaction.getIncludeInReports())) {
             strippedNote = "[Excluded from reports] " + strippedNote;
+        }
+
+        // pending status
+        if (transaction.isTransactionPending()) {
+            strippedNote = "[Pending] " + strippedNote;
         }
 
         return strippedNote;

@@ -21,10 +21,20 @@ public class Transaction {
     private Long amount;
     private String note;
     private TransactionType transactionType;
+    private TransactionState transactionState;
+    private ModelState modelState;
     private Boolean includeInReports;
 
     public boolean isExpenseOrTransfer() {
         return transactionType == TransactionType.TRANSFER || transactionType == TransactionType.EXPENSE;
+    }
+
+    public boolean isTransactionSoftDeleted() {
+        return modelState == ModelState.DELETED;
+    }
+
+    public boolean isTransactionPending() {
+        return transactionState == TransactionState.PENDING;
     }
 
 }

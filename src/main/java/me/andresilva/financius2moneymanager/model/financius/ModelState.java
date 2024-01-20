@@ -8,18 +8,19 @@ import java.util.Arrays;
 
 @Getter
 @RequiredArgsConstructor
-public enum TransactionState {
+public enum ModelState {
 
-    COMPLETE(1),
-    PENDING(2);
+    NORMAL(1),
+    DELETED(2),
+    DELETED_UNDO(3);
 
     private final int state;
 
-    public static TransactionState getByNumericValue(int numericCode) {
+    public static ModelState getByNumericValue(int numericCode) {
         return Arrays.stream(values())
                 .filter(value -> value.getState() == numericCode)
                 .findFirst()
-                .orElseThrow(() -> new FinanciusToMoneyManagerException("Invalid Financius Transaction state " + numericCode));
+                .orElseThrow(() -> new FinanciusToMoneyManagerException("Invalid Financius Model state " + numericCode));
     }
 
 }
