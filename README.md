@@ -1,8 +1,20 @@
 # Financius To (Realbyte) Money Manager
 
-Just want to run the tool now? See here 👉 [Start here: migrating the data between apps](#start-here-migrating-the-data-between-apps)
+Just want to run the tool now? See 👉 [Start here: migrating the data between apps](#start-here-migrating-the-data-between-apps)
 
 ---
+
+  * [Introduction](#introduction)
+  * [Data that can be migrated](#data-that-can-be-migrated)
+  * [Start here: migrating the data between apps](#start-here-migrating-the-data-between-apps)
+    * [1. Extract data from Financius](#1-extract-data-from-financius)
+    * [2. Run data](#2-run-data)
+    * [3. Import data into Money Manager](#3-import-data-into-money-manager)
+  * [Known issues and limitations](#known-issues-and-limitations)
+  * [Supporting the project](#supporting-the-project)
+  * [Useful links](#useful-links)
+
+## Introduction
 
 Financius was a great tool to manage personal finances. Although completely unsupported/abandoned, it still works on my 
 Android 12 phone. However, there are some limitations:
@@ -131,6 +143,26 @@ I've not tested merging existing data from Money Manager and Financius, so proce
 
 * Money Manager
     * The free version of the app is limited to 15 accounts
+
+
+## Supporting the project
+
+This tool was created to fulfill my own needs to migrate Financius data to Money Manager. I believe this may 
+be a useful contribution to the community, just in case someone else is also facing same problem. I consider the project 
+finished, but there are some ways you can help:
+
+* Use my referral code on Money Manager. Currently, there is an option to use a referral code to unlock one of two functions:
+  unlimited accounts or PC Manager. If you are willing to help me (thank you!), please input the code: ``41FE591E20`` on the "Recommend" screen.
+* This development is somewhat limited by the import type I chose. There is additionally a SQLite based backup, which alows to 
+  customize way more options on Money Manager. Since TSV import fulfilled my needs, and it was simpler, I opted by that approach.
+  I'm not currently planning to develop other import methods, so you can fork this project or start your own as an alternative 
+  import method. Users who still use Financius will be grateful for having more and improved ways to migrate the data out of it.
+
+**Please notice I consider this project done. I'm not accepting PR to include new functionalities or personal requests.** 
+I may accept bugfixes if they benefit a broader use case. If you are willing to work on this project, a great option 
+is to fork it and start as a base for something greater, or create a new project from scratch with the portions from this work you 
+find useful.
+
 
 ## Useful links
 
